@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-5 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         <aside>
             <h2 class="font-semibold text-center mb-2">Subcategorías</h2>
             <ul class="divide-y divide-gray-200">
@@ -36,9 +36,9 @@
                 Eliminar filtros
             </x-jet-button>
         </aside>
-        <div class="col-span-4">
+        <div class="md:col-span-2 lg:col-span-4">
             @if ($view == 'grid')
-            <ul class="grid grid-cols-4 gap-6">
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach ($products as $product)
                     <li class="bg-white rounded-lg shadow">
                         <article>
@@ -47,7 +47,7 @@
                             </figure>
                             <div class="py-4 px-6">
                                 <h1 class="text-lg font-semibold">
-                                    <a href="#">
+                                    <a href="{{ route('products.show', $product) }}">
                                         {{ Str::limit($product->name, 20) }}
                                     </a>
                                 </h1>
@@ -94,9 +94,9 @@
                                         
                                     </div>
                                     <div class="mt-auto mb-6">
-                                        <x-jet-danger-button>
+                                        <x-danger-enlace href="{{ route('products.show', $product) }}">
                                             Más información
-                                        </x-jet-danger-button>
+                                        </x-danger-enlace>
                                     </div>
                                 </div>
                             </article>
