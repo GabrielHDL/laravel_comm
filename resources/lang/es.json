@@ -81,9 +81,14 @@
     "password": "contraseña",
     "Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.": "Ingresa tu contraseña para confirmar el cerrado de sesiones masivo.",
     "Last active": "Última sesión",
-    "white": "blanco",
-    "blue": "azul",
-    "red": "rojo",
-    "black": "negro",
-    "Saved.": "Guardado"
+    "white": "Blanco",
+    "blue": "Azul",
+    "red": "Rojo",
+    "black": "Negro",
+    "Saved.": "Guardado",
+    "Showing": "Mostrando",
+    "to": "a",
+    "of": "de",
+    "results": "resultados",
+    "USD": "MXN"
 }

@@ -65,6 +65,7 @@
                     </div>
                     {{-- Districts --}}
                     <div>
+
                         <x-jet-label value="Distrito" />
 
                         <select class="form-control w-full" wire:model="district_id">
@@ -92,7 +93,10 @@
             </div>
         </div>
         <div>
-            <x-jet-button class="mt-6 mb-4" wire:click="create_order">
+            <x-jet-button 
+                wire:loading.attr="disabled"
+                wire:target="create_order"
+                class="mt-6 mb-4" wire:click="create_order">
                 Continuar con la compra
             </x-jet-button>
             
@@ -119,7 +123,7 @@
                                     <p>{{ __($item->options['size']) }}</p>
                                 @endisset
                             </div>
-                            <p>USD {{ $item->price }}</p>
+                            <p>{{__('USD')}} {{ $item->price }}</p>
                         </article>
                     </li>
                 @empty
@@ -140,14 +144,24 @@
                 </p>
                 <p class="flex justify-between items-center">
                     Envío
-                    <span class="font-semibold">Gratis</span>
+                    <span class="font-semibold">
+                        @if ($envio_type == 1 || $shipping_cost == 0)
+                            Gratis
+                        @else
+                            USD {{$shipping_cost}}
+                        @endif
+                    </span>
                 </p>
 
                 <hr class="mt-4 mb-3">
 
                 <p class="flex justify-between items-center font-semibold">
                     <span class="text-lg">Total</span>
-                    USD {{Cart::subtotal ()}}
+                    @if ($envio_type == 1)
+                        USD {{Cart::subtotal()}}
+                    @else
+                        USD {{Cart::subtotal() + $shipping_cost}}
+                    @endif
                 </p>
             </div>
 
