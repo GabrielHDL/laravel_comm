@@ -1,28 +1,36 @@
 <x-app-layout>
 
-    @php
-        // SDK de Mercado Pago
-        require base_path('/vendor/autoload.php');
-        // Agrega credenciales
-        MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        // Crea un objeto de preferencia
-        $preference = new MercadoPago\Preference();
-
-        // Crea un ítem en la preferencia
-        foreach ($items as $product) {
-            $item = new MercadoPago\Item();
-            $item->title = $product->name;
-            $item->quantity = $product->qty;
-            $item->unit_price = $product->price;
-
-            $products[] = $item;
-        }
-        $preference->items = $products;
-        $preference->save();
-    @endphp
-
-    <div class="container py-8">
+        <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
+            <div class="relative">
+                <div class="{{($order->status >= 2 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
+                    <i class="fas fa-check text-white"></i>
+                </div>
+                <div class="absolute -left-1.5 mt-0.5">
+                    <p class="{{($order->status >= 2 && $order->staus != 5) ? 'text-blue-400' : 'text-gray-400'}}">Recibido</p>
+                </div>
+            </div>
+            <div class="{{($order->status >= 3 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} h-1 flex-1 mx-2"></div>
+            <div class="relative">
+                <div class="{{($order->status >= 3 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
+                    <i class="fas fa-truck text-white"></i>
+                </div>
+                <div class="absolute -left-1.5 mt-0.5">
+                    <p class="{{($order->status >= 3 && $order->staus != 5) ? 'text-blue-400' : 'text-gray-400'}}">Enviado</p>
+                </div>
+            </div>
+            <div class="{{($order->status >= 4 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} h-1 flex-1 mx-2"></div>
+            <div class="relative">
+                <div class="{{($order->status >= 4 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
+                    <i class="fas fa-truck-loading text-white"></i>
+                </div>
+                <div class="absolute -left-2 mt-0.5">
+                    <p class="{{($order->status >= 4 && $order->staus != 5) ? 'text-blue-400' : 'text-gray-400'}}">Entregado</p>
+                </div>
+            </div>
+        </div>
+        
         <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
             <p class="text-gray-700 uppercase"><span class="font-semibold">Número de orden:</span> Orden - {{$order->id}}</p>
         </div>
@@ -90,45 +98,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="bg-white rounded-lg shadow-lg p-6 flex justify-between items-center">
-            <img class="h-8" src="{{asset('img/MC_VI_DI_2-1.jpg')}}" alt="">
-            <div class="text-gray-700">
-                <p class="text-sm font-semibold">
-                    Subtotal: {{$order->total - $order->shipping_cost}} USD
-                </p>
-                <p class="text-sm font-semibold">
-                    Envío: {{$order->shipping_cost}} USD
-                </p>
-                <p class="text-lg font-semibold uppercase">
-                    Total: {{$order->total}} USD
-                </p>
-
-                <div class="cho-container">
-                    
-                </div>
-
-            </div>
-        </div>
     </div>
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>   
-
-    <script>
-        // Agrega credenciales de SDK
-          const mp = new MercadoPago("{{config('services.mercadopago.key')}}", {
-                locale: 'es-AR'
-          });
-        
-          // Inicializa el checkout
-          mp.checkout({
-              preference: {
-                  id: '{{ $preference->id }}'
-              },
-              render: {
-                    container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
-                    label: 'Pagar', // Cambia el texto del botón de pago (opcional)
-              }
-        });
-        </script>
 
 </x-app-layout>

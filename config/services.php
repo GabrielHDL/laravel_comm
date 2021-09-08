@@ -33,6 +33,11 @@ return [
     'mercadopago' => [
         'key' => env('MP_PUBLIC_KEY'),
         'token' => env('MP_ACCES_TOKEN')
+    ],
+
+    'paypal' => [
+        'client_id' => env('PAYPAL_CLIENT_ID'),
+        'secret' => env('PAYPAL_SECRET')
     ]
 
 ];
