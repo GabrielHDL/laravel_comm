@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="container py-12">
         <section class="grid grid-cols-5 gap-6 text-white">
-            <a href="{{route('orders.index') . "?status=1"}}" class="bg-red-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{route('orders.index') . "?status=1"}}" class="bg-blue-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{$pendiente}}
                 </p>
@@ -10,7 +10,7 @@
                     <i class="fas fa-business-time"></i>
                 </p>
             </a>
-            <a href="{{route('orders.index') . "?status=2"}}" class="bg-gray-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{route('orders.index') . "?status=2"}}" class="bg-green-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{$recibido}}
                 </p>
@@ -37,7 +37,7 @@
                     <i class="fas fa-truck-loading"></i>
                 </p>
             </a>
-            <a href="{{route('orders.index') . "?status=5"}}" class="bg-green-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{route('orders.index') . "?status=5"}}" class="bg-red-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{$anulado}}
                 </p>
@@ -56,10 +56,10 @@
                             <span class="w-12 text-center">
                                 @switch($order->status)
                                     @case(1)
-                                        <i class="fas fa-business-time text-red-500 opacity-50"></i>
+                                        <i class="fas fa-business-time text-blue-500 opacity-50"></i>
                                         @break
                                     @case(2)
-                                        <i class="fas fa-credit-card text-gray-500 opacity-50"></i>
+                                        <i class="fas fa-credit-card text-green-500 opacity-50"></i>
                                         @break
                                     @case(3)
                                         <i class="fas fa-truck text-yellow-500 opacity-50"></i>
@@ -68,7 +68,7 @@
                                         <i class="fas fa-truck-loading text-pink-500 opacity-50"></i>
                                         @break
                                     @case(5)
-                                        <i class="fas fa-times-circle text-gren-500 opacity-50"></i>
+                                        <i class="fas fa-times-circle text-red-500 opacity-50"></i>
                                         @break
                                     @default
                                         

@@ -12,6 +12,7 @@ use App\Http\Livewire\CreateOrder;
 use App\Http\Livewire\PaymentOrder;
 
 use App\Http\Controllers\WebhooksController;
+use App\Models\Order;
 
 Route::get('/', WelcomeController::class);
 

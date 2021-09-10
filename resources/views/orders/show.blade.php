@@ -2,37 +2,54 @@
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        <div class="bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
-            <div class="relative">
-                <div class="{{($order->status >= 2 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
-                    <i class="fas fa-check text-white"></i>
+        <div class="{{($order->status >= 5) ? 'justify-center' : ''}} bg-white rounded-lg shadow-lg px-12 py-8 mb-6 flex items-center">
+            
+            @if($order->status == 5)
+                <div class="relative">
+                    <div class="{{($order->status >= 5) ? 'bg-red-500' : ''}} rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class="fas fa-times-circle text-white"></i>
+                    </div>
+                    <div class="absolute -left-1.5 mt-0.5">
+                        <p class="{{($order->status >= 5) ? 'text-red-500' : ''}}">Anulado</p>
+                    </div>
                 </div>
-                <div class="absolute -left-1.5 mt-0.5">
-                    <p class="{{($order->status >= 2 && $order->staus != 5) ? 'text-blue-400' : 'text-gray-400'}}">Recibido</p>
+            @elseif($order->status)
+                <div class="relative">
+                    <div class="{{($order->status >= 2 && $order->status != 5) ? 'bg-green-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class="fas fa-check text-white"></i>
+                    </div>
+                    <div class="absolute -left-1.5 mt-0.5">
+                        <p class="{{($order->status >= 2 && $order->status != 5) ? 'text-green-400' : 'text-gray-400'}}">Recibido</p>
+                    </div>
                 </div>
-            </div>
-            <div class="{{($order->status >= 3 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} h-1 flex-1 mx-2"></div>
-            <div class="relative">
-                <div class="{{($order->status >= 3 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
-                    <i class="fas fa-truck text-white"></i>
+                <div class="{{($order->status >= 3 && $order->status != 5) ? 'bg-green-400' : 'bg-gray-400'}} h-1 flex-1 mx-2"></div>
+                <div class="relative">
+                    <div class="{{($order->status >= 3 && $order->status != 5) ? 'bg-green-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class="fas fa-truck text-white"></i>
+                    </div>
+                    <div class="absolute -left-1.5 mt-0.5">
+                        <p class="{{($order->status >= 3 && $order->status != 5) ? 'text-green-400' : 'text-gray-400'}}">Enviado</p>
+                    </div>
                 </div>
-                <div class="absolute -left-1.5 mt-0.5">
-                    <p class="{{($order->status >= 3 && $order->staus != 5) ? 'text-blue-400' : 'text-gray-400'}}">Enviado</p>
+                <div class="{{($order->status >= 4 && $order->status != 5) ? 'bg-green-400' : 'bg-gray-400'}} h-1 flex-1 mx-2"></div>
+                <div class="relative">
+                    <div class="{{($order->status >= 4 && $order->status != 5) ? 'bg-green-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class="fas fa-truck-loading text-white"></i>
+                    </div>
+                    <div class="absolute -left-2 mt-0.5">
+                        <p class="{{($order->status >= 4 && $order->status != 5) ? 'text-green-400' : 'text-gray-400'}}">Entregado</p>
+                    </div>
                 </div>
-            </div>
-            <div class="{{($order->status >= 4 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} h-1 flex-1 mx-2"></div>
-            <div class="relative">
-                <div class="{{($order->status >= 4 && $order->staus != 5) ? 'bg-blue-400' : 'bg-gray-400'}} rounded-full h-12 w-12 flex items-center justify-center">
-                    <i class="fas fa-truck-loading text-white"></i>
-                </div>
-                <div class="absolute -left-2 mt-0.5">
-                    <p class="{{($order->status >= 4 && $order->staus != 5) ? 'text-blue-400' : 'text-gray-400'}}">Entregado</p>
-                </div>
-            </div>
+            @endif
         </div>
         
-        <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
+        <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6 flex items-center">
             <p class="text-gray-700 uppercase"><span class="font-semibold">Número de orden:</span> Orden - {{$order->id}}</p>
+            @if ($order->status == 1)
+                <x-button-enlace class="ml-auto" href="{{route('orders.payment', $order)}}">
+                    {{__("Go to Pay")}}
+                </x-button-enlace>
+            @endif
         </div>
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
             <div class="grid grid-cols-2 gap-6 text-gray-700">
