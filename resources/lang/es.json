@@ -92,5 +92,12 @@
     "results": "resultados",
     "USD": "MXN",
     "My Orders": "Mis órdenes",
-    "Go to Pay": "Ir a pagar"
+    "Go to Pay": "Ir a pagar",
+    "Category": "Categoría",
+    "Status": "Estado",
+    "Price": "Precio",
+    "Draft": "Borrador",
+    "Published": "Publicado",
+    "Edit": "Editar",
+    "Create Product": "Crear producto"
 }
