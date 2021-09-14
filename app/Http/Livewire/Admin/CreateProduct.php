@@ -15,21 +15,21 @@ class CreateProduct extends Component
 {
 
     public $categories, $subcategories = [], $brands = [];
-
     public $category_id = "", $subcategory_id = "", $brand_id = "";
-    
     public $name, $slug, $description, $price, $quantity;
+
 
     protected $rules = [
         'category_id' => 'required',
         'subcategory_id' => 'required',
-        'name' => 'required|unique:products',
+        'name' => 'required',
+        'slug' => 'required|unique:products',
         'description' => 'required',
         'brand_id' => 'required',
-        'price' => 'required'
+        'price' => 'required',
     ];
 
-    public  function updatedCategoryId($value) {
+    public function updatedCategoryId($value){
         $this->subcategories = Subcategory::where('category_id', $value)->get();
 
         $this->brands = Brand::whereHas('categories', function(Builder $query) use ($value){
@@ -39,19 +39,22 @@ class CreateProduct extends Component
         $this->reset(['subcategory_id', 'brand_id']);
     }
 
-    public function updatedName($value) {
+    public function updatedName($value){
         $this->slug = Str::slug($value);
     }
 
-    public function getSubcategoryProperty() {
+    public function getSubcategoryProperty(){
         return Subcategory::find($this->subcategory_id);
     }
 
-    public function mount() {
+    public function mount(){
+
         $this->categories = Category::all();
+
     }
 
-    public function save() {
+
+    public function save(){
 
         $rules = $this->rules;
 
@@ -80,7 +83,6 @@ class CreateProduct extends Component
         $product->save();
 
         return redirect()->route('admin.products.edit', $product);
-
     }
 
     public function render()

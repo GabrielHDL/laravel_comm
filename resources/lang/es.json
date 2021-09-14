@@ -99,5 +99,14 @@
     "Draft": "Borrador",
     "Published": "Publicado",
     "Edit": "Editar",
-    "Create Product": "Crear producto"
+    "Create Product": "Crear producto",
+    "Update Product": "Actualizar producto",
+    "Updated.": "Actualizado.",
+    "Quantity": "Cantidad",
+    "Added.": "Agregrado.",
+    "Add": "Agregar",
+    "Update": "Actualizar",
+    "Delete": "Eliminar",
+    "units": "unidades",
+    "Edit Colors": "Editar colores"
 }

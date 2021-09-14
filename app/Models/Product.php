@@ -17,46 +17,49 @@ class Product extends Model
 
     //accesores
 
-    public function getStockAttribute() {
+    public function getStockAttribute(){
         if ($this->subcategory->size) {
-            return ColorSize::whereHas('size.product', function(Builder $query) {
+            return  ColorSize::whereHas('size.product', function(Builder $query){
                         $query->where('id', $this->id);
                     })->sum('quantity');
         } elseif($this->subcategory->color) {
-            return ColorProduct::whereHas('product', function(Builder $query) {
+            return  ColorProduct::whereHas('product', function(Builder $query){
                         $query->where('id', $this->id);
                     })->sum('quantity');
-        } else {
+        }else{
+
             return $this->quantity;
+
         }
         
     }
 
-    //Relación uno a muchos
-    public function sizes() {
+
+    //Relacion uno a muchos
+    public function sizes(){
         return $this->hasMany(Size::class);
     }
 
-    //Relación uno a muchos inversa
-    public function brand() {
+    //Relacion uno a muchos inversa
+    public function brand(){
         return $this->belongsTo(Brand::class);
     }
 
-    public function subcategory() {
+    public function subcategory(){
         return $this->belongsTo(Subcategory::class);
     }
 
-    //Relación muchos a muchos
-    public function colors() {
-        return $this->belongsToMany(Color::class)->withPivot('quantity');
+    //Relacion muchos a muchos
+    public function colors(){
+        return $this->belongsToMany(Color::class)->withPivot('quantity', 'id');
     }
 
-    //Relación uno a muchos polimorfica
-    public function images() {
+    //relacion uno a muchos polimoefica
+    public function images(){
         return $this->morphMany(Image::class, "imageable");
     }
 
-    //url amigable
+    //URL AMIGABLES
     public function getRouteKeyName()
     {
         return 'slug';
